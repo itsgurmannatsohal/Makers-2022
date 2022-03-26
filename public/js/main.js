@@ -68,18 +68,16 @@ function outputMessage(message) {
   const control = document.createElement("video");
   control.setAttribute("id", "video-render");
   control.controls = "controls";
-  if(typeof(videoURL) == "undefined") {
+  if (typeof videoURL == "undefined") {
     control.style.display = "none";
-  }
-  else {
+  } else {
     control.src = videoURL;
   }
   div.appendChild(control);
   document.querySelector(".chat-messages").appendChild(div);
 }
-console.log("hello");
-var hideVideoParent = document.getElementsByClassName("message");
 
+var hideVideoParent = document.getElementsByClassName("message");
 
 // Add room name to DOM
 function outputRoomName(room) {
@@ -104,3 +102,5 @@ document.getElementById("leave-btn").addEventListener("click", () => {
   } else {
   }
 });
+
+

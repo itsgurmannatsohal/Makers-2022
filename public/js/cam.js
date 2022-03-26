@@ -5,6 +5,18 @@ const video_out = document.getElementById("video-output");
 const recordBtn = document.querySelector(".recordbtn");
 const vendorUrl = window.URL || window.webkitURL;
 
+var max_time = 5;
+var cinterval;
+
+function countdown_timer() {
+  // decrease timer
+  max_time--;
+  document.getElementById("countdown").innerHTML = max_time;
+  if (max_time == 0) {
+    clearInterval(cinterval);
+  }
+}
+
 var videoURL;
 // Start webcam
 (function () {
@@ -41,7 +53,7 @@ var videoURL;
   function draw(video, context, width, height) {
     // console.log(width);
     // console.log(height);
-    
+
     context.drawImage(video, 0, 0, width, height);
     setTimeout(() => draw(video, context, width, height), 10);
   }
@@ -70,11 +82,14 @@ var videoURL;
 
   recordBtn.addEventListener("click", () => {
     console.log("recording start");
+    cinterval = setInterval("countdown_timer()", 1000);
     mediaRecorder.start();
     setInterval(draw(video, context, 400, 300), 300);
     console.log("start");
     setTimeout(() => {
       mediaRecorder.stop();
     }, 5000);
+    max_time = 5;
+    document.getElementById("countdown").innerHTML = 5; 
   });
 })();
